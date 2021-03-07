@@ -15,5 +15,7 @@ namespace Alquiler_Discos
         }
 
         public DbSet<Cd> cds { get; set; }
+        public DbSet<Cliente> clientes { get; set; }
+        public DbSet<Sancion> sancions { get; set; }
     }
 }
