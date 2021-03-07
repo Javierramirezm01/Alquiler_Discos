@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Alquiler_Discos.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210307193702_InicioDB")]
-    partial class InicioDB
+    [Migration("20210307195025_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
