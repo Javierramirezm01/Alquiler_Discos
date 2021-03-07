@@ -23,6 +23,5 @@ namespace Alquiler_Discos
         public DbSet<Sancion> sancions { get; set; }
     }
 
-    }
 
 }
