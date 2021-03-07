@@ -21,6 +21,7 @@ namespace Alquiler_Discos
 
         public DbSet<Cliente> clientes { get; set; }
         public DbSet<Sancion> sancions { get; set; }
+    }
 
     }
 
