@@ -2,7 +2,7 @@
 
 namespace Alquiler_Discos.Migrations
 {
-    public partial class InicioDB : Migration
+    public partial class InicioTD : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
