@@ -12,12 +12,6 @@ namespace Alquiler_Discos.Models
         public int NroDiasSancion { get; set; }
 
         //Propiedad de clave foránea
-        public int ClienteId { get; set; }
-        //Propiedad de navegación
-        public Cliente Cliente { get; set; }
-
-
-        //Propiedad de clave foránea
         public int AlquilerId { get; set; }
         //Propiedad de navegación
         public Alquiler Alquiler { get; set; }

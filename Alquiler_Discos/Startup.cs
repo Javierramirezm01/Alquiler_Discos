@@ -29,7 +29,7 @@ namespace Alquiler_Discos
             services.AddControllers();
             services.AddDbContext<Context>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConecction")));
+                    Configuration.GetConnectionString("DefaultConnection")));
 
 
         }

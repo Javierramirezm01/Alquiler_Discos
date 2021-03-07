@@ -15,7 +15,5 @@ namespace Alquiler_Discos.Models
         public string  ubicacion { get; set; }
         public string estado { get; set; } 
 
-        public int DetalleAlquilerId { get; set; }
-        public DetalleAlquiler DetalleAlquiler { get; set; }
     }
 }
