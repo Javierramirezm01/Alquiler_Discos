@@ -13,7 +13,6 @@ namespace Alquiler_Discos
         {
 
         }
-
         public DbSet<Cd> cds { get; set; }
 
         public DbSet<Alquiler> alquilers { get; set; }
