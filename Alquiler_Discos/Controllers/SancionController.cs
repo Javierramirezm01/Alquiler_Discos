@@ -71,10 +71,10 @@ namespace Alquiler_Discos.Controllers
             Respuesta oRespuesta = new Respuesta();
             try
             {
-                Sancion sancion = new Sancion();
+                var sancion = _miBd.sancions.Find(oSancion.Id);
                 sancion.TipoSancion = oSancion.TipoSancion;
                 sancion.NroDiasSancion = oSancion.NroDiasSancion;
-                _miBd.sancions.Add(sancion);
+                _miBd.sancions.Update(sancion);
                 _miBd.SaveChanges();
                 oRespuesta.Exito = 1;
 

@@ -77,7 +77,7 @@ namespace Alquiler_Discos.Controllers
             Respuesta oRespuesta = new Respuesta();
             try
             {
-                Cliente cliente = new Cliente();
+                var cliente = _miBd.clientes.Find(oCliente.Id);
                 cliente.Nombre = oCliente.Nombre;
                 cliente.Direccion = oCliente.Direccion;
                 cliente.Telefono = oCliente.Telefono;
@@ -87,7 +87,7 @@ namespace Alquiler_Discos.Controllers
                 cliente.TemaInteres = oCliente.TemaInteres;
                 cliente.Estado = oCliente.Estado;
                 cliente.NroDNI = oCliente.NroDNI;
-                _miBd.clientes.Add(cliente);
+                _miBd.clientes.Update(cliente);
                 _miBd.SaveChanges();
                 oRespuesta.Exito = 1;
 
