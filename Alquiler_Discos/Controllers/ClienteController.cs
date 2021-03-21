@@ -4,6 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Alquiler_Discos.Models;
+using Alquiler_Discos.Response;
+using Alquiler_Discos.ViewModels;
 
 namespace Alquiler_Discos.Controllers
 {
@@ -105,7 +108,7 @@ namespace Alquiler_Discos.Controllers
             Respuesta oRespuesta = new Respuesta();
             try
             {
-                var cliente = _miBd..Find(Id);
+                var cliente = _miBd.clientes.Find(Id);
                 _miBd.clientes.Remove(cliente);
                 _miBd.SaveChanges();
                 oRespuesta.Exito = 1;

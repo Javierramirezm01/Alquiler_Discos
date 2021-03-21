@@ -42,7 +42,7 @@ namespace Alquiler_Discos.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(SancionViewModel oCliente)
+        public IActionResult Add(SancionViewModel oSancion)
         {
             Respuesta oRespuesta = new Respuesta();
             try
@@ -65,7 +65,7 @@ namespace Alquiler_Discos.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update(SancionViewModel oCliente)
+        public IActionResult Update(SancionViewModel oSancion)
         {
             Respuesta oRespuesta = new Respuesta();
             try
@@ -95,7 +95,7 @@ namespace Alquiler_Discos.Controllers
             try
             {
                 var sancion = _miBd.sancions.Find(Id);
-                _miBd.clientes.Remove(sancion);
+                _miBd.sancions.Remove(sancion);
                 _miBd.SaveChanges();
                 oRespuesta.Exito = 1;
 
