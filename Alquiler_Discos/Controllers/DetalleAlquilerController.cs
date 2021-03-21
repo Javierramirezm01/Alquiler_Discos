@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Alquiler_Discos.Models;
 using Alquiler_Discos.Response;
 using Alquiler_Discos.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace Alquiler_Discos.Controllers
 {
@@ -27,7 +28,7 @@ namespace Alquiler_Discos.Controllers
             Respuesta oRespuesta = new Respuesta();
             try
             {
-                var Lista = _miBd.detalleAlquilers.ToList();
+                var Lista = _miBd.detalleAlquilers.Include("Cd").Include("Alquiler").ToList();
                 oRespuesta.Exito = 1;
                 oRespuesta.Datos = Lista;
 
