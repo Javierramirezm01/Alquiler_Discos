@@ -52,6 +52,7 @@ namespace Alquiler_Discos.Controllers
                 alquiler.nroAlquiler = oAlquiler.nroAlquiler;
                 alquiler.fechaAlquiler = oAlquiler.fechaAlquiler;
                 alquiler.valorAlquiler = oAlquiler.valorAlquiler;
+                alquiler.ClienteId = oAlquiler.ClienteId;
                 
                 _miBd.alquilers.Add(alquiler);
                 _miBd.SaveChanges();
@@ -78,6 +79,8 @@ namespace Alquiler_Discos.Controllers
                 alquiler.nroAlquiler = oAlquiler.nroAlquiler;
                 alquiler.fechaAlquiler = oAlquiler.fechaAlquiler;
                 alquiler.valorAlquiler = oAlquiler.valorAlquiler;
+                alquiler.ClienteId = oAlquiler.ClienteId;
+
                 _miBd.alquilers.Update(alquiler);
                 _miBd.SaveChanges();
                 oRespuesta.Exito = 1;

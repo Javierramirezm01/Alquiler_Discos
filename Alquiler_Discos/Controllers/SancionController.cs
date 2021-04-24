@@ -51,6 +51,7 @@ namespace Alquiler_Discos.Controllers
                 Sancion sancion = new Sancion();
                 sancion.TipoSancion = oSancion.TipoSancion;
                 sancion.NroDiasSancion = oSancion.NroDiasSancion;
+                sancion.AlquilerId = oSancion.AlquilerId;
                 _miBd.sancions.Add(sancion);
                 _miBd.SaveChanges();
                 oRespuesta.Exito = 1;
@@ -74,6 +75,7 @@ namespace Alquiler_Discos.Controllers
                 var sancion = _miBd.sancions.Find(oSancion.Id);
                 sancion.TipoSancion = oSancion.TipoSancion;
                 sancion.NroDiasSancion = oSancion.NroDiasSancion;
+                sancion.AlquilerId = oSancion.AlquilerId;
                 _miBd.sancions.Update(sancion);
                 _miBd.SaveChanges();
                 oRespuesta.Exito = 1;
