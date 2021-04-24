@@ -52,6 +52,8 @@ namespace Alquiler_Discos.Controllers
                 detalleAlquiler.item = oDetalleAlquiler.item;
                 detalleAlquiler.diasPrestamo = oDetalleAlquiler.diasPrestamo;
                 detalleAlquiler.fechaDevolucion = oDetalleAlquiler.fechaDevolucion;
+                detalleAlquiler.CdId = oDetalleAlquiler.CdId;
+                detalleAlquiler.AlquilerId = oDetalleAlquiler.AlquilerId;
                 
                 _miBd.detalleAlquilers.Add(detalleAlquiler);
                 _miBd.SaveChanges();
@@ -78,6 +80,8 @@ namespace Alquiler_Discos.Controllers
                 detalleAlquiler.item = oDetalleAlquiler.item;
                 detalleAlquiler.diasPrestamo = oDetalleAlquiler.diasPrestamo;
                 detalleAlquiler.fechaDevolucion = oDetalleAlquiler.fechaDevolucion;
+                detalleAlquiler.CdId = oDetalleAlquiler.CdId;
+                detalleAlquiler.AlquilerId = oDetalleAlquiler.AlquilerId;
                 _miBd.detalleAlquilers.Update(detalleAlquiler);
                 _miBd.SaveChanges();
                 oRespuesta.Exito = 1;
