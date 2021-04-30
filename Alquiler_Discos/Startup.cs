@@ -16,6 +16,7 @@ namespace Alquiler_Discos
 {
     public class Startup
     {
+        //readonly string Cors = "Cors";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -26,6 +27,21 @@ namespace Alquiler_Discos
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy(name: Cors,
+            //                      builder =>
+            //                      {
+            //                          builder.WithOrigins("*");
+
+            //                      });
+            //});
+            services.AddCors(options =>
+                            options.AddPolicy("AllowAll",
+                                                   p => p.AllowAnyOrigin()
+                                                   .AllowAnyMethod()
+                                                   .AllowAnyHeader()));
+            services.AddControllers().AddNewtonsoftJson();
             services.AddControllers();
             services.AddDbContext<Context>(options =>
                 options.UseSqlServer(
@@ -45,7 +61,7 @@ namespace Alquiler_Discos
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors("AllowAll");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
