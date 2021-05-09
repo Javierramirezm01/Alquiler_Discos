@@ -50,7 +50,7 @@ namespace Alquiler_Discos.Controllers
                 Cd cd = new Cd();
                 cd.codigoTitulo = oCd.codigoTitulo;
                 cd.condicion = oCd.condicion;
-                cd.estado = oCd.estado;
+                cd.estado = true;
                 cd.ubicacion = oCd.ubicacion;
                 _miBd.cds.Add(cd);
                 _miBd.SaveChanges();
@@ -76,7 +76,6 @@ namespace Alquiler_Discos.Controllers
                 var cd = _miBd.cds.Find(oCd.Id);
                 cd.codigoTitulo = oCd.codigoTitulo;
                 cd.condicion = oCd.condicion;
-                cd.estado = oCd.estado;
                 cd.ubicacion = oCd.ubicacion;
                 _miBd.cds.Update(cd);
                 _miBd.SaveChanges();
@@ -100,7 +99,17 @@ namespace Alquiler_Discos.Controllers
             try
             {
                 var cd = _miBd.cds.Find(Id);
-                _miBd.cds.Remove(cd);
+                if (cd.estado)
+                {
+                    cd.estado = false;
+                }
+
+                else
+                {
+                    cd.estado = true;
+                }
+
+                _miBd.cds.Update(cd);
                 _miBd.SaveChanges();
                 oRespuesta.Exito = 1;
 
