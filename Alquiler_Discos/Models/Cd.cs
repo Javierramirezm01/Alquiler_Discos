@@ -13,7 +13,7 @@ namespace Alquiler_Discos.Models
 
         public string  condicion { get; set; }
         public string  ubicacion { get; set; }
-        public string estado { get; set; } 
+        public bool estado { get; set; } 
 
     }
 }

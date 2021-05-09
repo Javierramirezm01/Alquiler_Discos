@@ -16,8 +16,10 @@ namespace Alquiler_Discos.Models
         public DateTime FechaNacimineto { get; set; }
         public DateTime FechaInscripcion { get; set; }
         public string TemaInteres { get; set; }
-        public string Estado { get; set; }
+        public bool Estado { get; set; }
         public int NroDNI { get; set; }
+
+       
 
 
 

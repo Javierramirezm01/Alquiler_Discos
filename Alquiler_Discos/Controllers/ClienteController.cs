@@ -55,7 +55,7 @@ namespace Alquiler_Discos.Controllers
                 cliente.FechaNacimineto = oCliente.FechaNacimineto;
                 cliente.FechaInscripcion = oCliente.FechaInscripcion;
                 cliente.TemaInteres = oCliente.TemaInteres;
-                cliente.Estado = oCliente.Estado;
+                cliente.Estado = true;
                 cliente.NroDNI = oCliente.NroDNI;
                 _miBd.clientes.Add(cliente);
                 _miBd.SaveChanges();
@@ -85,7 +85,6 @@ namespace Alquiler_Discos.Controllers
                 cliente.FechaNacimineto = oCliente.FechaNacimineto;
                 cliente.FechaInscripcion = oCliente.FechaInscripcion;
                 cliente.TemaInteres = oCliente.TemaInteres;
-                cliente.Estado = oCliente.Estado;
                 cliente.NroDNI = oCliente.NroDNI;
                 _miBd.clientes.Update(cliente);
                 _miBd.SaveChanges();
@@ -109,7 +108,17 @@ namespace Alquiler_Discos.Controllers
             try
             {
                 var cliente = _miBd.clientes.Find(Id);
-                _miBd.clientes.Remove(cliente);
+                if (cliente.Estado)
+                {
+                    cliente.Estado = false;
+                }
+
+                else
+                {
+                    cliente.Estado = true;
+                }
+
+                _miBd.clientes.Update(cliente);
                 _miBd.SaveChanges();
                 oRespuesta.Exito = 1;
 
