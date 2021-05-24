@@ -9,9 +9,9 @@ namespace Alquiler_Discos.Models
     {
         public int Id { get; set; }
 
-        public string nroAlquiler { get; set; }
-        public string fechaAlquiler { get; set; }
-        public string valorAlquiler { get; set; }
+        public int nroAlquiler { get; set; }
+        public DateTime fechaAlquiler { get; set; }
+        public double valorAlquiler { get; set; }
       
         public int ClienteId { get; set; }
         public Cliente Cliente { get; set; }

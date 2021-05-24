@@ -118,5 +118,46 @@ namespace Alquiler_Discos.Controllers
 
             return Ok(oRespuesta);
         }
+
+        [HttpGet("Cd")]
+        public IActionResult GetCd()
+        {
+            Respuesta oRespuesta = new Respuesta();
+            try
+            {
+                var Lista = _miBd.cds.Where(Cd => Cd.estado == true).ToList();
+                oRespuesta.Exito = 1;
+                oRespuesta.Datos = Lista;
+
+            }
+            catch (Exception e)
+            {
+                oRespuesta.Mensaje = e.Message;
+
+            }
+
+            return Ok(oRespuesta);
+        }
+
+        [HttpGet("Alquiler")]
+        public IActionResult GetAlquiler()
+        {
+            Respuesta oRespuesta = new Respuesta();
+            try
+            {
+                var Lista = _miBd.alquilers.ToList();
+                oRespuesta.Exito = 1;
+                oRespuesta.Datos = Lista;
+
+            }
+            catch (Exception e)
+            {
+                oRespuesta.Mensaje = e.Message;
+
+            }
+
+            return Ok(oRespuesta);
+        }
+
     }
 }
