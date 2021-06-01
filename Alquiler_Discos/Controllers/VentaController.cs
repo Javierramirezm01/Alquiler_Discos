@@ -9,15 +9,16 @@ using Alquiler_Discos.Response;
 using Alquiler_Discos.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Alquiler_Discos.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DetalleAlquilerController : ControllerBase
+    public class VentaController : ControllerBase
     {
         private readonly Context _miBd;
 
-        public DetalleAlquilerController(Context miBd)
+        public VentaController(Context miBd)
         {
             _miBd = miBd;
         }
@@ -28,7 +29,7 @@ namespace Alquiler_Discos.Controllers
             Respuesta oRespuesta = new Respuesta();
             try
             {
-                var Lista = _miBd.detalleAlquilers.Include("Cd").Include("Alquiler").ToList();
+                var Lista = _miBd.ventas.Include("Cliente").ToList();
                 oRespuesta.Exito = 1;
                 oRespuesta.Datos = Lista;
 
@@ -43,24 +44,32 @@ namespace Alquiler_Discos.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(DetalleAlquilerViewModel oDetalleAlquiler)
+        public IActionResult Add(VentaViewModel oVenta)
         {
             Respuesta oRespuesta = new Respuesta();
             try
             {
-                DetalleAlquiler detalleAlquiler = new DetalleAlquiler();
-                detalleAlquiler.item = oDetalleAlquiler.item;
-                detalleAlquiler.diasPrestamo = oDetalleAlquiler.diasPrestamo;
-                detalleAlquiler.fechaDevolucion = oDetalleAlquiler.fechaDevolucion;
-                detalleAlquiler.CdId = oDetalleAlquiler.CdId;
-                detalleAlquiler.AlquilerId = oDetalleAlquiler.AlquilerId;
-                
-                _miBd.detalleAlquilers.Add(detalleAlquiler);
+                Venta venta = new Venta();
+                venta.CodigoVenta = oVenta.CodigoVenta;
+                venta.ClienteId = oVenta.ClienteId;
+                venta.FechaVenta = oVenta.FechaVenta;
+                venta.ValorVenta = oVenta.ValorVenta;
+                _miBd.ventas.Add(venta);
                 _miBd.SaveChanges();
+
+                foreach (var item in oVenta.ProductoIds)
+                {
+                    DetalleVenta detalle = new DetalleVenta();
+                    detalle.VentaId = venta.Id;
+                    detalle.ProductoId = item;
+                    _miBd.detalleVentas.Add(detalle);
+                    _miBd.SaveChanges();
+                }
+              
+
                 oRespuesta.Exito = 1;
-
-
             }
+
             catch (Exception e)
             {
                 oRespuesta.Mensaje = e.Message;
@@ -71,18 +80,19 @@ namespace Alquiler_Discos.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update(DetalleAlquilerViewModel oDetalleAlquiler)
+        public IActionResult Update(VentaViewModel oVenta)
         {
             Respuesta oRespuesta = new Respuesta();
             try
             {
-                var detalleAlquiler = _miBd.detalleAlquilers.Find(oDetalleAlquiler.Id);
-                detalleAlquiler.item = oDetalleAlquiler.item;
-                detalleAlquiler.diasPrestamo = oDetalleAlquiler.diasPrestamo;
-                detalleAlquiler.fechaDevolucion = oDetalleAlquiler.fechaDevolucion;
-                detalleAlquiler.CdId = oDetalleAlquiler.CdId;
-                detalleAlquiler.AlquilerId = oDetalleAlquiler.AlquilerId;
-                _miBd.detalleAlquilers.Update(detalleAlquiler);
+                var venta = _miBd.ventas.Find(oVenta.Id);
+                venta.CodigoVenta = oVenta.CodigoVenta;
+                venta.ClienteId = oVenta.ClienteId;
+                venta.Cliente = oVenta.Cliente;
+                venta.FechaVenta = oVenta.FechaVenta;
+                venta.ValorVenta = oVenta.ValorVenta;
+
+                _miBd.ventas.Update(venta);
                 _miBd.SaveChanges();
                 oRespuesta.Exito = 1;
 
@@ -103,8 +113,8 @@ namespace Alquiler_Discos.Controllers
             Respuesta oRespuesta = new Respuesta();
             try
             {
-                var detalleAlquiler = _miBd.detalleAlquilers.Find(Id);
-                _miBd.detalleAlquilers.Remove(detalleAlquiler);
+                var venta = _miBd.ventas.Find(Id);
+                _miBd.ventas.Remove(venta);
                 _miBd.SaveChanges();
                 oRespuesta.Exito = 1;
 
@@ -119,13 +129,13 @@ namespace Alquiler_Discos.Controllers
             return Ok(oRespuesta);
         }
 
-        [HttpGet("Cd")]
-        public IActionResult GetCd()
+        [HttpGet ("Clientes")]
+        public IActionResult GetClientes()
         {
             Respuesta oRespuesta = new Respuesta();
             try
             {
-                var Lista = _miBd.cds.Where(Cd => Cd.estado == true).ToList();
+                var Lista = _miBd.clientes.Where(C=>C.Estado==true).ToList();
                 oRespuesta.Exito = 1;
                 oRespuesta.Datos = Lista;
 
@@ -139,13 +149,13 @@ namespace Alquiler_Discos.Controllers
             return Ok(oRespuesta);
         }
 
-        [HttpGet("Alquiler")]
-        public IActionResult GetAlquiler()
+        [HttpGet("Productos")]
+        public IActionResult GetProductos()
         {
             Respuesta oRespuesta = new Respuesta();
             try
             {
-                var Lista = _miBd.alquilers.ToList();
+                var Lista = _miBd.productos.ToList();
                 oRespuesta.Exito = 1;
                 oRespuesta.Datos = Lista;
 

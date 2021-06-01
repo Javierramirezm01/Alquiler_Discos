@@ -4,14 +4,16 @@ using Alquiler_Discos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Alquiler_Discos.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20210517180503_SecrearonclasesVentasDetalleVentaProducto")]
+    partial class SecrearonclasesVentasDetalleVentaProducto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,14 +31,14 @@ namespace Alquiler_Discos.Migrations
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("fechaAlquiler")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("fechaAlquiler")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("nroAlquiler")
-                        .HasColumnType("int");
+                    b.Property<string>("nroAlquiler")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("valorAlquiler")
-                        .HasColumnType("float");
+                    b.Property<string>("valorAlquiler")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -121,11 +123,11 @@ namespace Alquiler_Discos.Migrations
                     b.Property<int>("CdId")
                         .HasColumnType("int");
 
-                    b.Property<int>("diasPrestamo")
-                        .HasColumnType("int");
+                    b.Property<string>("diasPrestamo")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("fechaDevolucion")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("fechaDevolucion")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("item")
                         .HasColumnType("nvarchar(max)");

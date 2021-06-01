@@ -56,6 +56,7 @@ namespace Alquiler_Discos.Controllers
                 
                 _miBd.alquilers.Add(alquiler);
                 _miBd.SaveChanges();
+              
                 oRespuesta.Exito = 1;
 
 
@@ -117,5 +118,25 @@ namespace Alquiler_Discos.Controllers
 
             return Ok(oRespuesta);
         }
+        [HttpGet("Clientes")]
+        public IActionResult GetClientes()
+        {
+            Respuesta oRespuesta = new Respuesta();
+            try
+            {
+                var Lista = _miBd.clientes.Where(C => C.Estado == true).ToList();
+                oRespuesta.Exito = 1;
+                oRespuesta.Datos = Lista;
+
+            }
+            catch (Exception e)
+            {
+                oRespuesta.Mensaje = e.Message;
+
+            }
+
+            return Ok(oRespuesta);
+        }
+
     }
 }

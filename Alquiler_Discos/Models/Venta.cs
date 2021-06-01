@@ -5,15 +5,13 @@ using System.Threading.Tasks;
 
 namespace Alquiler_Discos.Models
 {
-    public class Alquiler
+    public class Venta
     {
         public int Id { get; set; }
-
-        public int nroAlquiler { get; set; }
-        public DateTime fechaAlquiler { get; set; }
-        public double valorAlquiler { get; set; }
-      
+        public string CodigoVenta { get; set; }
         public int ClienteId { get; set; }
         public Cliente Cliente { get; set; }
+        public DateTime FechaVenta { get; set; }
+        public double ValorVenta { get; set; }
     }
 }
