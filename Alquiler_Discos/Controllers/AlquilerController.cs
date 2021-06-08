@@ -28,7 +28,16 @@ namespace Alquiler_Discos.Controllers
             Respuesta oRespuesta = new Respuesta();
             try
             {
-                var Lista = _miBd.alquilers.Include("Cliente").ToList();
+                var Lista = (from i in _miBd.alquilers
+                             select new AlquilerViewModel
+                             {
+                                 Id = i.Id,
+                                 nroAlquiler = i.nroAlquiler,
+                                 fechaAlquiler = i.fechaAlquiler,
+                                 valorAlquiler = i.valorAlquiler,
+                                 Cliente = _miBd.clientes.Where(c => c.Id == i.ClienteId).FirstOrDefault(),
+                                 DetallesAlquiler = _miBd.detalleAlquilers.Include("Producto").Where(d => d.AlquilerId == i.Id).ToList()
+                             }).ToList();
                 oRespuesta.Exito = 1;
                 oRespuesta.Datos = Lista;
 
@@ -56,7 +65,16 @@ namespace Alquiler_Discos.Controllers
                 
                 _miBd.alquilers.Add(alquiler);
                 _miBd.SaveChanges();
-              
+
+                foreach (var item in oAlquiler.ProductoIds)
+                {
+                    DetalleAlquiler detalle = new DetalleAlquiler();
+                    detalle.AlquilerId = alquiler.Id;
+                    detalle.ProductoId = item;
+                    _miBd.detalleAlquilers.Add(detalle);
+                    _miBd.SaveChanges();
+                }
+
                 oRespuesta.Exito = 1;
 
 
@@ -125,6 +143,26 @@ namespace Alquiler_Discos.Controllers
             try
             {
                 var Lista = _miBd.clientes.Where(C => C.Estado == true).ToList();
+                oRespuesta.Exito = 1;
+                oRespuesta.Datos = Lista;
+
+            }
+            catch (Exception e)
+            {
+                oRespuesta.Mensaje = e.Message;
+
+            }
+
+            return Ok(oRespuesta);
+        }
+
+        [HttpGet("Productos")]
+        public IActionResult GetProductos()
+        {
+            Respuesta oRespuesta = new Respuesta();
+            try
+            {
+                var Lista = _miBd.productos.ToList();
                 oRespuesta.Exito = 1;
                 oRespuesta.Datos = Lista;
 

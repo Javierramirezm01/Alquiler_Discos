@@ -17,7 +17,12 @@ namespace Alquiler_Discos.ViewModels
         public int ClienteId { get; set; }
         public Cliente Cliente { get; set; }
 
-        public List<DetalleAlquiler> DetalleAlquilers { get; set; }
+        public List<int> ProductoIds { get; set; }
+        public List<DetalleAlquiler> DetallesAlquiler { get; set; }
+
+        public List<Producto> Productos { get; set; }
+
+        
 
        
     }

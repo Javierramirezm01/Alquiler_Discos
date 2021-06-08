@@ -11,6 +11,8 @@ namespace Alquiler_Discos.ViewModels
         public int Id { get; set; }
         public string TipoSancion { get; set; }
         public int NroDiasSancion { get; set; }
+        public int ClienteId { get; set; }
+        public Cliente nombre { get; set; }
 
         //Propiedad de clave foránea
         public int AlquilerId { get; set; }

@@ -4,14 +4,16 @@ using Alquiler_Discos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Alquiler_Discos.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20210602125527_CReacion de tablas")]
+    partial class CReaciondetablas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -118,16 +120,25 @@ namespace Alquiler_Discos.Migrations
                     b.Property<int>("AlquilerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductoId")
+                    b.Property<int>("CdId")
                         .HasColumnType("int");
+
+                    b.Property<int>("diasPrestamo")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("fechaDevolucion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("item")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AlquilerId");
 
-                    b.HasIndex("ProductoId");
+                    b.HasIndex("CdId");
 
-                    b.ToTable("DetalleAlquiler");
+                    b.ToTable("detalleAlquilers");
                 });
 
             modelBuilder.Entity("Alquiler_Discos.Models.DetalleVenta", b =>
@@ -177,20 +188,15 @@ namespace Alquiler_Discos.Migrations
                     b.Property<int>("AlquilerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ClienteId")
-                        .HasColumnType("int");
-
                     b.Property<int>("NroDiasSancion")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("fechaSancion")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("TipoSancion")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AlquilerId");
-
-                    b.HasIndex("ClienteId");
 
                     b.ToTable("sancions");
                 });
@@ -240,15 +246,15 @@ namespace Alquiler_Discos.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Alquiler_Discos.Models.Producto", "Producto")
+                    b.HasOne("Alquiler_Discos.Models.Cd", "Cd")
                         .WithMany()
-                        .HasForeignKey("ProductoId")
+                        .HasForeignKey("CdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Alquiler");
 
-                    b.Navigation("Producto");
+                    b.Navigation("Cd");
                 });
 
             modelBuilder.Entity("Alquiler_Discos.Models.DetalleVenta", b =>
@@ -278,15 +284,7 @@ namespace Alquiler_Discos.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Alquiler_Discos.Models.Cliente", "Cliente")
-                        .WithMany()
-                        .HasForeignKey("ClienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Alquiler");
-
-                    b.Navigation("Cliente");
                 });
 
             modelBuilder.Entity("Alquiler_Discos.Models.Venta", b =>

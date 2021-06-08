@@ -26,6 +26,7 @@ namespace Alquiler_Discos
         public DbSet<Venta> ventas { get; set; }
         public DbSet<Producto> productos { get; set; }
         public DbSet<DetalleVenta> detalleVentas { get; set; }
+        public DbSet<DetalleAlquiler> detalleAlquiler { get; set; }
     }
 
 

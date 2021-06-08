@@ -16,7 +16,6 @@ namespace Alquiler_Discos.ViewModels
         public double ValorVenta { get; set; }
         public List <int> ProductoIds { get; set; }
         public List <DetalleVenta> DetallesVentas { get; set; }
-
         public List<Producto> Productos { get; set; }
 
 

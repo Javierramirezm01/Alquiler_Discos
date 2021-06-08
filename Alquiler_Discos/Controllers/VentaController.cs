@@ -29,7 +29,16 @@ namespace Alquiler_Discos.Controllers
             Respuesta oRespuesta = new Respuesta();
             try
             {
-                var Lista = _miBd.ventas.Include("Cliente").ToList();
+                var Lista = (from i in _miBd.ventas
+                             select new VentaViewModel
+                             {
+                                 Id = i.Id,
+                                 CodigoVenta = i.CodigoVenta,
+                                 FechaVenta = i.FechaVenta,
+                                 ValorVenta = i.ValorVenta,
+                                 Cliente = _miBd.clientes.Where(c => c.Id == i.ClienteId).FirstOrDefault(),
+                                 DetallesVentas = _miBd.detalleVentas.Include("Producto").Where(d => d.VentaId == i.Id).ToList()
+                             }).ToList();
                 oRespuesta.Exito = 1;
                 oRespuesta.Datos = Lista;
 
